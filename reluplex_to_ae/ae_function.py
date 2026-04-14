@@ -174,7 +174,7 @@ def feature_map_save_divided_i( filename, i, data):
         file.write("\t]\n")
     file.write("\n]")
     file.close()
-    print("ae.feature_map_save_divided_i - 保存文件成功")
+    print("ae.feature_map_save_divided_i - file saved successfully")
 
 def feature_map_save_divided( filename, data):
     feature_map_num = compute_map_num(data)
@@ -196,7 +196,7 @@ def feature_map_save_divided( filename, data):
             file.write("],\n")
         file.write("]\n")
         file.close()
-    print("feature_map_save_divided - 保存文件成功")
+    print("feature_map_save_divided - file saved successfully")
 
 def feature_map_save( filename, data, divided_flag):
     mkdir_if_not_exit()
@@ -212,6 +212,6 @@ def feature_map_save( filename, data, divided_flag):
     file.write("]\n")
 
     file.close()
-    print("feature_map_save - 保存文件成功")
+    print("feature_map_save - file saved successfully")
     if divided_flag:
         feature_map_save_divided( filename, data)

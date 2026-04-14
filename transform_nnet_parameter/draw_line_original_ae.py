@@ -46,35 +46,35 @@ font1 = {
 
 
 # plt.tick_params(labelsize=14)
-plt.plot(x1, y1, label="数字6原始样本")
-plt.title('数字6在全连接层的输入特征值', font1)
-plt.xlabel('特征变量', font1)
-plt.ylabel('特征值', font1)
+plt.plot(x1, y1, label="Original sample of digit 6")
+plt.title('Fully connected layer input features of digit 6', font1)
+plt.xlabel('Feature index', font1)
+plt.ylabel('Feature value', font1)
 plt.legend()
-plt.savefig("./数字6.jpg")
+plt.savefig("./digit-6.jpg")
 plt.show()
 
 
 # plt.tick_params(labelsize=14)
-plt.plot(x1, y1, label="数字6原始样本")
-plt.plot(x1, y2,'--', label="数字6对抗样本", color='orange')
+plt.plot(x1, y1, label="Original sample of digit 6")
+plt.plot(x1, y2,'--', label="Adversarial sample of digit 6", color='orange')
 # plt.plot(x1, y3, label="target", color='green')
-plt.title('数字6原始样本 vs. 数字6对抗样本', font1)
-plt.xlabel('特征变量', font1)
-plt.ylabel('特征值', font1)
+plt.title('Original digit 6 sample vs. adversarial digit 6 sample', font1)
+plt.xlabel('Feature index', font1)
+plt.ylabel('Feature value', font1)
 plt.legend()
-plt.savefig("./数字6-vs-对抗样本.jpg")
+plt.savefig("./digit-6-vs-adversarial-sample.jpg")
 plt.show()
 
 
 # plt.tick_params(labelsize=14)
-plt.plot(x1, y3, label="数字5原始样本", color='green' )
-plt.plot(x1, y2,'--', label="数字6对抗样本", color='orange')
-plt.title('数字5原始样本 vs. 数字6对抗样本(被预测为5)', font1)
-plt.xlabel('特征变量', font1)
-plt.ylabel('特征值', font1)
+plt.plot(x1, y3, label="Original sample of digit 5", color='green' )
+plt.plot(x1, y2,'--', label="Adversarial sample of digit 6", color='orange')
+plt.title('Original digit 5 sample vs. digit 6 adversarial sample predicted as 5', font1)
+plt.xlabel('Feature index', font1)
+plt.ylabel('Feature value', font1)
 plt.legend()
-plt.savefig("./数字5-vs-对抗样本.jpg")
+plt.savefig("./digit-5-vs-adversarial-sample.jpg")
 plt.show()
 
 
@@ -111,5 +111,4 @@ plt.show()
 # plt.legend()
 # plt.savefig("./Target-vs-Adversarial.jpg")
 # plt.show()
-
 

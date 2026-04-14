@@ -96,7 +96,7 @@ def feature_map_save_divided(filename, data):
             file.write("\n]")
         file.close()
 
-    print("feature_map_save_divided - 保存文件成功")
+    print("feature_map_save_divided - file saved successfully")
 
 def feature_map_save(filename, data, divided_flag):
     mkdir_if_not_exit()
@@ -116,7 +116,7 @@ def feature_map_save(filename, data, divided_flag):
         file.write("\n]")
 
     file.close()
-    print("feature_map_save - 保存文件成功")
+    print("feature_map_save - file saved successfully")
     if divided_flag:
         feature_map_save_divided(filename, data)
 
@@ -147,7 +147,7 @@ def weight_save_divided(filename, data):
             file.write("]\n")
         file.close()
 
-    print("weight_save_divided - 保存文件成功")
+    print("weight_save_divided - file saved successfully")
 
 
 def weight_save(filename, data, divided_flag):
@@ -168,7 +168,7 @@ def weight_save(filename, data, divided_flag):
             file.write("],\n")
         file.write("]\n")
     file.close()
-    print("weight_save - 保存文件成功")
+    print("weight_save - file saved successfully")
     if divided_flag:
         weight_save_divided(filename, data)
 
@@ -185,7 +185,7 @@ def fc_weight_save(filename, data):
             file.write(s)
         file.write("]\n")
     file.close()
-    print("fc_weight_save - 保存文件成功")
+    print("fc_weight_save - file saved successfully")
 
 
 def fc_after_relu_save(filename, data):
@@ -199,7 +199,7 @@ def fc_after_relu_save(filename, data):
             file.write(s)
         file.write("]\n")
     file.close()
-    print("fc_after_relu_save - 保存文件成功")
+    print("fc_after_relu_save - file saved successfully")
 
 
 def biases_save(filename, data):
@@ -210,6 +210,5 @@ def biases_save(filename, data):
         s = "[ " + s + " ]\n"
         file.write(s)
     file.close()
-    print("biases_save - 保存文件成功")
-
+    print("biases_save - file saved successfully")
 

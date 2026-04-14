@@ -26,7 +26,6 @@ def nine_step_use_img(img_file, label, log_file, category):
     input_x = mpimg.imread(img_file)
     input_x = input_x.reshape(1, 28, 28, 1)
     with tf.Session() as sess:
-        # 载入已有模型
         saver = tf.train.import_meta_graph(p.model + '/model.ckpt.meta')
         saver.restore(sess, p.model + '/model.ckpt')
 
@@ -37,52 +36,39 @@ def nine_step_use_img(img_file, label, log_file, category):
 
         # fs.show_image_label(input_x, label)
 
-        # 将输入数据填充进去
         feed_dict = {x: input_x, y_: label}
 
-        # 模型中间层的参数
-        # 第一层参数
         layer1_conv_weights = tf.get_collection('layer1_conv_weights')
         layer1_conv_biases = tf.get_collection('layer1_conv_biases')
         layer1_conv_result = tf.get_collection('layer1_conv_result')
         layer1_after_relu = tf.get_collection('layer1_after_relu')
 
-        # 第二层参数
         layer2_pool = tf.get_collection('layer2_pool')
 
-        # # 第三层参数
         # layer3_conv_weights = tf.get_collection('layer3_conv_weights')
         # layer3_conv_biases = tf.get_collection('layer3_conv_biases')
         # layer3_conv_result = tf.get_collection('layer3_conv_result')
         # layer3_after_relu = tf.get_collection('layer3_after_relu')
         #
-        # # 第四层参数
         # layer4_pool = tf.get_collection('layer4_pool')
 
-        # 第五层参数
         fc1_weights = tf.get_collection('fc1_weights')
         fc1_biases = tf.get_collection('fc1_biases')
         fc1_after_relu = tf.get_collection('fc1_after_relu')
 
-        # 第六层参数
         fc2_weights = tf.get_collection('fc2_weights')
         fc2_biases = tf.get_collection('fc2_biases')
         fc2_after_relu = tf.get_collection('fc2_after_relu')
 
-        # 第七层参数
         fc3_weights = tf.get_collection('fc3_weights')
         fc3_biases = tf.get_collection('fc3_biases')
         fc3_result = tf.get_collection('fc3_result')
 
-        # 取得结果Tensor
         x = tf.get_collection('x')
         y = tf.get_collection('y')
         y_ = tf.get_collection('y_')
-        accuracy = graph.get_tensor_by_name("accuracy:0")  # 准确率
-        correct_prediction = graph.get_tensor_by_name("correct_prediction:0")  # 预测是否正确的List，正确为True，错误表示为False
-        # cross_entropy = graph.get_tensor_by_name("cross_entropy:0")   # 交叉熵
-        # cross_entropy_mean = graph.get_tensor_by_name("cross_entropy_mean:0")   # 交叉熵的平均值
-        # loss = cross_entropy_mean + tf.add_n(tf.get_collection('losses'))   # 损失值
+        accuracy = graph.get_tensor_by_name("accuracy:0")
+        correct_prediction = graph.get_tensor_by_name("correct_prediction:0")
 
         # Add more to the current graph
         # add_on_op = tf.multiply(op_to_restore, 2)
@@ -94,7 +80,7 @@ def nine_step_use_img(img_file, label, log_file, category):
                            fc1_weights, fc1_biases, fc1_after_relu,
                            fc2_weights, fc2_biases, fc2_after_relu,
                            fc3_weights, fc3_biases, fc3_result,
-                           correct_prediction, accuracy, x, y, y_],  # y_是真实标签，y是预测标签
+                           correct_prediction, accuracy, x, y, y_],
                           # feed_dict=feed_dict)
                           feed_dict=feed_dict)
 
@@ -159,7 +145,6 @@ def nine_step_use_ae_txt(original_label):
     ae_input_x = ae_input_x.reshape(1, 28, 28, 1)
 
     with tf.Session() as sess:
-        # 载入已有模型
         saver = tf.train.import_meta_graph(p.model + '/model.ckpt.meta')
         saver.restore(sess, p.model + '/model.ckpt')
 
@@ -170,52 +155,39 @@ def nine_step_use_ae_txt(original_label):
 
         # show_image_label(test_data[10], test_label[10])
 
-        # 将输入数据填充进去
         feed_dict = {x: ae_input_x, y_: original_label}
 
-        # 模型中间层的参数
-        # 第一层参数
         layer1_conv_weights = tf.get_collection('layer1_conv_weights')
         layer1_conv_biases = tf.get_collection('layer1_conv_biases')
         layer1_conv_result = tf.get_collection('layer1_conv_result')
         layer1_after_relu = tf.get_collection('layer1_after_relu')
 
-        # 第二层参数
         layer2_pool = tf.get_collection('layer2_pool')
 
-        # # 第三层参数
         # layer3_conv_weights = tf.get_collection('layer3_conv_weights')
         # layer3_conv_biases = tf.get_collection('layer3_conv_biases')
         # layer3_conv_result = tf.get_collection('layer3_conv_result')
         # layer3_after_relu = tf.get_collection('layer3_after_relu')
         #
-        # # 第四层参数
         # layer4_pool = tf.get_collection('layer4_pool')
 
-        # 第五层参数
         fc1_weights = tf.get_collection('fc1_weights')
         fc1_biases = tf.get_collection('fc1_biases')
         fc1_after_relu = tf.get_collection('fc1_after_relu')
 
-        # 第六层参数
         fc2_weights = tf.get_collection('fc2_weights')
         fc2_biases = tf.get_collection('fc2_biases')
         fc2_after_relu = tf.get_collection('fc2_after_relu')
 
-        # 第七层参数
         fc3_weights = tf.get_collection('fc3_weights')
         fc3_biases = tf.get_collection('fc3_biases')
         fc3_result = tf.get_collection('fc3_result')
 
-        # 取得结果Tensor
         x = tf.get_collection('x')
         y = tf.get_collection('y')
         y_ = tf.get_collection('y_')
-        accuracy = graph.get_tensor_by_name("accuracy:0")  # 准确率
-        correct_prediction = graph.get_tensor_by_name("correct_prediction:0")  # 预测是否正确的List，正确为True，错误表示为False
-        # cross_entropy = graph.get_tensor_by_name("cross_entropy:0")   # 交叉熵
-        # cross_entropy_mean = graph.get_tensor_by_name("cross_entropy_mean:0")   # 交叉熵的平均值
-        # loss = cross_entropy_mean + tf.add_n(tf.get_collection('losses'))   # 损失值
+        accuracy = graph.get_tensor_by_name("accuracy:0")
+        correct_prediction = graph.get_tensor_by_name("correct_prediction:0")
 
         # Add more to the current graph
         # add_on_op = tf.multiply(op_to_restore, 2)
@@ -227,7 +199,7 @@ def nine_step_use_ae_txt(original_label):
                            fc1_weights, fc1_biases, fc1_after_relu,
                            fc2_weights, fc2_biases, fc2_after_relu,
                            fc3_weights, fc3_biases, fc3_result,
-                           correct_prediction, accuracy, x, y, y_],  # y_是真实标签，y是预测标签
+                           correct_prediction, accuracy, x, y, y_],
                            feed_dict=feed_dict)
         print("\nthe ae from txt : \n")
         print("y:", result[17][0])

@@ -8,14 +8,12 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 
-# 原版
 # Accuracy_list_train = [0.8077641408751334, 0.9048492529348986, 0.9206410085378869, 0.9299459711846318, 0.9367495997865528,
 #                        0.9424026147278548, 0.94545424226254, 0.9478221718249733, 0.9503902081109925, 0.953125]
 #
 # Accuracy_list_test = [0.8998397435897436, 0.9200721153846154, 0.9322916666666666, 0.9376001602564102, 0.9411057692307693,
 #                       0.9452123397435898, 0.9482171474358975, 0.9489182692307693, 0.9508213141025641, 0.9522235576923077]
 
-# 尾值契合原模型的修改版
 Accuracy_list_train = [0.8077641408751334, 0.9048492529348986, 0.9206410085378869, 0.9299459711846318, 0.9367495997865528,
                        0.9424026147278548, 0.94545424226254, 0.9478221718249733, 0.9503902081109925, 0.9517]
 
@@ -67,9 +65,7 @@ plt.show()
 plt.tick_params(labelsize=18)
 plt.plot(x1, y1, 'o-', label="训练准确率")
 plt.plot(x1, y3, 'v-', label="测试准确率", color='orange')
-# plt.title('训练准确率 vs. 测试准确率', font1)
 # plt.xlabel('Epoches', font1)
-# plt.ylabel('准确率', font1)
 plt.legend()
 plt.savefig("./训练准确率-vs-测试准确率.jpg")
 plt.show()
@@ -95,9 +91,7 @@ plt.show()
 plt.tick_params(labelsize=18)
 plt.plot(x1, Loss_list_train, 'o-', label="训练损失")
 plt.plot(x1, Loss_list_test, 'v-', label="测试损失", color='orange')
-# plt.title('训练损失 vs. 测试损失', font1)
 # plt.xlabel('Epoches', font1)
-# plt.ylabel('损失', font1)
 plt.legend()
 plt.savefig("./训练损失-vs-测试损失.jpg")
 plt.show()

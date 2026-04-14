@@ -51,37 +51,28 @@ adversarial_train_temp_model_dir = repo_path('adversarial_train', 'temp-model')
 adversarial_train_model_500 = repo_path('adversarial_train', 'model_9_9_after_ae_train_500')
 adversarial_train_model_1000 = repo_path('adversarial_train', 'model_9_9_after_ae_train_1000')
 
-# 图片输入层参数
 w = 28
 h = 28
-c = 1   # 通道数
+c = 1
 
-# 第一层卷积核大小、个数、结果size
 layer1_conv_size = 9
 layer1_conv_amount = 1
 layer1_conv_result_size = 20
 
-# 第二层池化后的结果
 layer2_pool_result_size = 10
 
-# # 第三层卷积核大小、个数、结果size
 # layer3_conv_size = 5
 # layer3_conv_amount = 3
 # layer3_conv_result_size = 8
 #
-# # 第四层池化后的结果
 # layer4_pool_result_size = 4
 
-# 进入全连接层的节点个数
 fc_input = 100
 
-# 第一全连接层传输后的节点个数
 fc1_amount = 24
 
-# 第二全连接层传输后的节点个数ss
 fc2_amount = 24
 
-# 第三全连接层传输后的节点
 fc3_amount = 10
 
 
@@ -94,7 +85,6 @@ original_file = original_folder + original_file_name + ".png"  # change!
 
 
 test_label = np.array([original_label])
-# 找到的全连接层对抗样本
 ae_fc_input = np.array([])
 
 

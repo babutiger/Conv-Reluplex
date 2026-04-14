@@ -9,7 +9,6 @@ from mycode.mnist_all_minish_one_map_9_9 import s0_parameter_all as p
 
 
 
-# ------------- 读取总参数部分 -------------------
 
 # folder = "../bk_parameter/"
 # folder_divided = "../bk_parameter_divided/"
@@ -19,15 +18,15 @@ folder_divided = p.file_base + "/s2_parameter_divided/"
 ae_folder = p.file_base + "/reluplex_to_ae/s5_ae_divided_parameter_temp/"
 
 def get_list_from_file(path):
-    file = open(path, "r")  # 设置文件对象
-    string = file.read()  # 将txt文件的所有内容读入到字符串str中
-    file.close()  # 将文件关闭
+    file = open(path, "r")
+    string = file.read()
+    file.close()
 
     string = string.replace("\n", "").replace("\t", "")
     string = string.replace("[", "").replace("]", "").replace(" ", "").replace(",,", ",")
     arr = string.split(",")
     while "" in arr:
-        arr.remove("")  # 把数组内的""这玩意清理掉
+        arr.remove("")
     return arr
 
 def read_ae_x(myfolder, filename):
@@ -177,7 +176,6 @@ def read_fc3_biases(filename):
 # read_layer4_pool("layer4_pool")
 
 
-# ------- 读取单独某个特征map -----------
 def read_layer1_conv_weight_divided(filename):
     lst = get_list_from_file(folder_divided + "layer1_conv_weights/" + filename)
     arr = np.array(lst).astype(np.float64).reshape(p.layer1_conv_size, p.layer1_conv_size, p.c)
@@ -198,7 +196,7 @@ def read_ae_layer1_after_relu_divided(filename):
 
 def read_layer3_conv_weight_divided(filename):
     lst = get_list_from_file(folder_divided + "layer3_conv_weights/" + filename)
-    arr = np.array(lst).astype(np.float64).reshape(p.layer3_conv_size, p.layer3_conv_size, p.layer1_conv_amount)     # 5*5*6表示前面的6个特征map
+    arr = np.array(lst).astype(np.float64).reshape(p.layer3_conv_size, p.layer3_conv_size, p.layer1_conv_amount)
     return arr
 
 

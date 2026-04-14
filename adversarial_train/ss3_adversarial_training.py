@@ -16,17 +16,14 @@ import matplotlib.image as mpimg
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-#mnist数据集中训练数据和测试数据保存地址
 train_path = p.adversarial_train_data_train_path
 test_path = p.adversarial_train_data_test_path
 test_original_path = p.mnist_test_path
 
-# 读取训练数据及测试数据
 train_data,train_label = fs.read_image(train_path)
 test_data,test_label = fs.read_image(test_path)
 test_original_data,test_original_label = fs.read_image(test_original_path)
 
-# 打乱训练数据及测试数据
 train_image_num = len(train_data)
 train_image_index = np.arange(train_image_num)
 np.random.shuffle(train_image_index)
@@ -49,7 +46,6 @@ test_original_label = test_original_label[test_original_image_index]
 def adversarial_train():
     with tf.Session() as sess:
 
-        # 载入已有模型
         saver = tf.train.import_meta_graph(os.path.join(p.model, 'model.ckpt.meta'))
         saver.restore(sess, os.path.join(p.model, 'model.ckpt'))
 
@@ -62,11 +58,10 @@ def adversarial_train():
         y_ = graph.get_tensor_by_name("y_:0")
 
 
-        accuracy = graph.get_tensor_by_name("accuracy:0")     # 准确率
-        correct_prediction = graph.get_tensor_by_name("correct_prediction:0")   # 预测是否正确的List，正确为True，错误表示为False
-        # cross_entropy = graph.get_tensor_by_name("cross_entropy")   # 交叉熵
-        cross_entropy_mean = graph.get_tensor_by_name("cross_entropy_mean:0")   # 交叉熵的平均值
-        loss = cross_entropy_mean   # 损失值
+        accuracy = graph.get_tensor_by_name("accuracy:0")
+        correct_prediction = graph.get_tensor_by_name("correct_prediction:0")
+        cross_entropy_mean = graph.get_tensor_by_name("cross_entropy_mean:0")
+        loss = cross_entropy_mean
         # ae_train_op = tf.train.AdamOptimizer(0.01).minimize(loss)
         ae_train_op = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy_mean)
         # tf.train.GradientDescentOptimizer(0.02)
@@ -108,8 +103,6 @@ def adversarial_train():
 
 
         # ---------- begin ae training ---------
-        # 将所有样本训练10次，每次训练中以64个为一组训练完所有样本。
-        # train_num可以设置大一些。
         train_num = 10
         batch_size = 16
 
@@ -218,7 +211,6 @@ def adversarial_train():
 
 
 
-        # 存储模型所有参数
         folder = p.adversarial_train_temp_model_dir
         p.ensure_dir(folder)
         saver.save(sess, os.path.join(folder, "model.ckpt"))

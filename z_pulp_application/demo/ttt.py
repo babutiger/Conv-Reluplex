@@ -3,9 +3,7 @@
 from pulp import *
 
 def getresult(c, con):
-# 设置对象
      prob = LpProblem('myPro', LpMinimize)
-# 设置三个变量，并设置变量最小取值
 
      x11 = LpVariable("x11", lowBound=0)
      x12 = LpVariable("x12", lowBound=0)
@@ -23,15 +21,13 @@ def getresult(c, con):
 
      #c = [160, 130, 220, 170, 140, 130, 190, 150, 190, 200, 230]
 
-# 目标函数
      z = 0
      for i in range(len(X)):
          z += X[i]*c[i]
      #print(z)
      prob += z
 
-# 载入约束变量
-     prob += x11 * 2+x12+x13+x14 == con[0]# 约束条件1
+     prob += x11 * 2+x12+x13+x14 == con[0]
      prob += x21+x22 * 4+x23+x24 == con[1]
      prob += x31+x32+x33 == con[2]
 
@@ -46,15 +42,13 @@ def getresult(c, con):
      prob += x14 + x24 <= con[9]
      prob += x14 + x24 >= con[10]
 
-# 求解
 
      status = prob.solve()
 
      print("status: " + str(status))
      print("LpStatus[status]: " + LpStatus[status])
-     print("result: " + str(value(prob.objective)) + "\n")  # 计算结果
+     print("result: " + str(value(prob.objective)) + "\n")
 
-# 显示结果
      for i in prob.variables():
          print(i.name + "=" + str(i.varValue))
 

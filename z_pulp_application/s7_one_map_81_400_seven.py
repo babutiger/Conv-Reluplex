@@ -16,13 +16,12 @@ import re
 # ae_result_folder = p.file_base + "/z_pulp_application/ae_result/"
 # ae_result_file = ae_result_folder + "ae_file.txt"
 
-input_layer_1 = 28  # 输入矩阵的大小，由此计算总的输入节点个数
+input_layer_1 = 28
 input_layer_2 = 28
 input_layer_3 = 1
 
 name_to_idx_map = {}
 
-# 1. 定义决策变量，并设置变量最小取值
 class params_nodes():
     def __init__(self):
         # input variable
@@ -216,20 +215,17 @@ def seven_step(source_file, log_file):
                 name = "x_" + str(j) + "_" + str(k) + "_" + str(m)
                 X.append(param.__getattribute__(name))
 
-    # 2. 设置对象
     prob = LpProblem('mySolve', LpMaximize)
     # prob = LpProblem('mySolve', LpMinimize)
 
-    # 3. 添加目标函数
     z = 0
     for i in range(len(X)):
         z += X[i]
     print(z)
     prob += z
 
-    # 4. 载入约束变量
     idx = 1
-    file = open(source_file, "r")  # 设置文件对象
+    file = open(source_file, "r")
     for line in file.readlines():
         print(str(idx) + ":" + line)
         idx = idx + 1
@@ -397,14 +393,12 @@ def seven_step(source_file, log_file):
                         arr[159])
                      + param.__getattribute__(arr[160]) * float(arr[161])
                      + float(arr[162])) == result
-    file.close()  # 将文件关闭
+    file.close()
 
-    # 5. 求解
     status = prob.solve()
 
     idx_to_value_map = {}
 
-    # 显示结果
     for i in prob.variables():
         print(i.name + "=" + str(i.varValue))
         print(name_to_idx_map[i.name])
@@ -412,7 +406,7 @@ def seven_step(source_file, log_file):
 
     print("\nstatus: " + str(status))
     print("LpStatus[status]: " + LpStatus[status])
-    print("result: " + str(value(prob.objective)) + "\n")  # 计算结果
+    print("result: " + str(value(prob.objective)) + "\n")
 
     # ----- write to log file ----
     param_file_index = re.split(r"\.|=", source_file)[1]
@@ -427,7 +421,7 @@ def seven_step(source_file, log_file):
         if not os.path.exists(curr_p.ae_result_folder):
             os.mkdir(curr_p.ae_result_folder)
 
-        file = open(curr_p.ae_result_file, 'w+')  # 可读可写可新建，覆盖方式
+        file = open(curr_p.ae_result_file, 'w+')
 
         for i in range(input_layer_1 * input_layer_2 * input_layer_3):
             file.write(str(idx_to_value_map[i]) + ",")

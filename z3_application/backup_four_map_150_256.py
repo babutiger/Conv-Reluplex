@@ -11,9 +11,7 @@ set_option(rational_to_decimal=True)
 
 source_folder = p.file_base + "/conv_network_simulation/compute_process_replace_result_with_ae/"
 source_file = source_folder + "compute_process_layer3_with_x_ae_all_idx=0.param"
-# equation_lines = 64  # 文件中总共有多少行
-# param_num_in_line = 150  # 参与计算的一个卷积里有多少个参数
-input_layer_1 = 12  # 输入矩阵的大小，由此计算总的输入节点个数
+input_layer_1 = 12
 input_layer_2 = 12
 input_layer_3 = 6
 
@@ -44,7 +42,7 @@ param = params_nodes()
 # print(is_real(param.x_11_11_5))
 # print("x_11_11_5".find(str(param.x_11_11_5)))
 idx = 1
-file = open(source_file , "r")  # 设置文件对象
+file = open(source_file , "r")
 for line in file.readlines():
     print(str(idx) + ":" + line)
     idx = idx + 1
@@ -206,7 +204,7 @@ for line in file.readlines():
               + param.__getattribute__(arr[292]) * float(arr[293]) + param.__getattribute__(arr[294]) * float(arr[295])
               + param.__getattribute__(arr[296]) * float(arr[297]) + param.__getattribute__(arr[298]) * float(arr[299])
               + float(arr[300]) == result)
-file.close()  # 将文件关闭
+file.close()
 
 
 # begin to check

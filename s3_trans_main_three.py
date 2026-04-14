@@ -9,7 +9,6 @@ from mycode.mnist_all_minish_one_map_9_9.transform_nnet_parameter import trans_f
 from mycode.mnist_all_minish_one_map_9_9 import s0_parameter_all as p
 
 def third_step_special(speical_name):
-    # 读入参数
     # input = rd.read_layer4_pool("layer4_pool")
 
     # change to one map
@@ -29,7 +28,6 @@ def third_step_special(speical_name):
     fc3_weights = rd.read_fc3_weights("fc3_weights")
     fc3_biases = rd.read_fc3_biases("fc3_biases")
 
-    # 参数格式化写入文件
     ts.transform_input_special_name(input, "input", speical_name)
 
     ts.transform_weight_special_name(fc1_weights, p.fc_input, p.fc1_amount, "layer1_weight", speical_name)
@@ -55,7 +53,6 @@ if __name__ == "__main__":
 
 # def third_step():
 #
-#     # 读入参数
 #     # input = rd.read_layer4_pool("layer4_pool")
 #
 #     # change to one map
@@ -75,7 +72,6 @@ if __name__ == "__main__":
 #     fc3_weights = rd.read_fc3_weights("fc3_weights")
 #     fc3_biases = rd.read_fc3_biases("fc3_biases")
 #
-#     # 参数格式化写入文件
 #     ts.transform_input(input, "input")
 #
 #     ts.transform_weight(fc1_weights, p.fc_input, p.fc1_amount, "layer1_weight")

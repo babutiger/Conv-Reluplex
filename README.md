@@ -17,6 +17,37 @@ Paper title: `Conv-Reluplex : A Verification Framework For Convolution Neural Ne
 
 This codebase corresponds to the experimental pipeline used in that work.
 
+Authors: `Jin Xu`, `Zishan Li`, `Miaomiao Zhang`, `Bowen Du`
+
+Venue: `Proceedings of the 33rd International Conference on Software Engineering and Knowledge Engineering (SEKE 2021)`
+
+Year: `2021`
+
+Pages: `160-165`
+
+DOI: `10.18293/SEKE2021-085`
+
+PDF: <https://ksiresearch.org/seke/seke21paper/paper085.pdf>
+
+## Citation
+
+Plain text:
+
+`Jin Xu, Zishan Li, Miaomiao Zhang, and Bowen Du. Conv-Reluplex : A Verification Framework For Convolution Neural Networks. In Proceedings of the 33rd International Conference on Software Engineering and Knowledge Engineering (SEKE 2021), pages 160-165, 2021. DOI: 10.18293/SEKE2021-085.`
+
+BibTeX:
+
+```bibtex
+@inproceedings{xu2021convreluplex,
+  author = {Jin Xu and Zishan Li and Miaomiao Zhang and Bowen Du},
+  title = {Conv-Reluplex : A Verification Framework For Convolution Neural Networks},
+  booktitle = {Proceedings of the 33rd International Conference on Software Engineering and Knowledge Engineering (SEKE 2021)},
+  pages = {160--165},
+  year = {2021},
+  doi = {10.18293/SEKE2021-085}
+}
+```
+
 ## What The Project Does
 
 The workflow is roughly:

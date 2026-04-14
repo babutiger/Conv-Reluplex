@@ -1,5 +1,7 @@
 # Conv-Reluplex
 
+This repository contains the code for the paper `Conv-Reluplex : A Verification Framework For Convolution Neural Networks`.
+
 Legacy research code for generating and reconstructing adversarial examples on a small MNIST convolutional network by combining:
 
 - CNN training and parameter export
@@ -8,6 +10,12 @@ Legacy research code for generating and reconstructing adversarial examples on a
 - LP solving with `pulp` to recover pixel-space adversarial images
 
 This repository is a code-and-artifacts snapshot. It includes pretrained checkpoints, intermediate parameter dumps, generated examples, and solver logs used by the original experiments.
+
+## Paper
+
+Paper title: `Conv-Reluplex : A Verification Framework For Convolution Neural Networks`
+
+This codebase corresponds to the experimental pipeline used in that work.
 
 ## What The Project Does
 

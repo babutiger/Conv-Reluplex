@@ -1,6 +1,20 @@
 MIT License
 
+Copyright (c) 2021 Jin Xu, Zishan Li, Miaomiao Zhang, Bowen Du
 Copyright (c) 2026 babutiger
+
+Scope notice:
+
+The MIT grant below applies to the original source code and repository-authored
+documentation in this repository.
+
+This file does not newly relicense:
+
+- external software obtained separately, including Reluplex / Leaky-Reluplex,
+  GLPK, or nnet-related upstream code
+- bundled experiment artifacts retained for reproducibility, such as trained
+  checkpoints, generated images, logs, and intermediate outputs, unless a file
+  explicitly states otherwise
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

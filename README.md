@@ -127,10 +127,22 @@ If you want to rerun the pipeline, start here:
 - Reluplex: <https://github.com/guykatzz/ReluplexCav2017>
 - Leaky-Reluplex: <https://github.com/Lzsxx/Leaky-Reluplex>
 
+These external tools are referenced by the pipeline but are not vendored in
+this repository. In particular, `glpk-4.60/`, `nnet/`, and upstream
+Reluplex / Leaky-Reluplex source code are not redistributed here.
+
 ## Current Status
 
 The repository is now versioned and published on GitHub. It is best understood as a preserved experimental code snapshot rather than a cleaned production package.
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+The original source code and repository-authored documentation in this
+repository are released under the MIT License.
+
+To preserve paper reproducibility, the repository also retains checkpoints,
+generated images, intermediate parameter dumps, and logs. Those reproducibility
+artifacts are not newly relicensed by the root MIT grant unless a file
+explicitly states otherwise.
+
+See `LICENSE` for the MIT text and `NOTICE` for the licensing scope.

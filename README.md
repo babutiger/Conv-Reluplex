@@ -131,4 +131,6 @@ If you want to rerun the pipeline, start here:
 
 The repository is now versioned and published on GitHub. It is best understood as a preserved experimental code snapshot rather than a cleaned production package.
 
-No open-source license has been added yet.
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.

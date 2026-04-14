@@ -137,12 +137,4 @@ The repository is now versioned and published on GitHub. It is best understood a
 
 ## License
 
-The original source code and repository-authored documentation in this
-repository are released under the MIT License.
-
-To preserve paper reproducibility, the repository also retains checkpoints,
-generated images, intermediate parameter dumps, and logs. Those reproducibility
-artifacts are not newly relicensed by the root MIT grant unless a file
-explicitly states otherwise.
-
-See `LICENSE` for the MIT text and `NOTICE` for the licensing scope.
+This project is licensed under the MIT License. See `LICENSE` for details.

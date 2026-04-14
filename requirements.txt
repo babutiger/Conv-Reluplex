@@ -1,0 +1,8 @@
+# Recommended interpreter: Python 3.7
+tensorflow==1.15.0
+tensorboard==1.15.0
+numpy
+scikit-image
+matplotlib
+pulp
+scikit-learn

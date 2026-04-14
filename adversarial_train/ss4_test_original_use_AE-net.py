@@ -16,7 +16,7 @@ import matplotlib.image as mpimg
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # 读取测试数据，并打乱顺序
-test_path = "/home/lzs/Documents/my_image_net/mycode/data_set/mnist_data/test/"
+test_path = p.mnist_test_path
 
 # 读取训练数据及测试数据
 test_data,test_label = fs.read_image(test_path)
@@ -33,8 +33,8 @@ with tf.Session() as sess:
     # saver = tf.train.import_meta_graph('./model_9_9_after_ae_train_1000/model.ckpt.meta')
     # saver.restore(sess, './model_9_9_after_ae_train_1000/model.ckpt')
 
-    saver = tf.train.import_meta_graph('./model_9_9_after_ae_train_500/model.ckpt.meta')
-    saver.restore(sess, './model_9_9_after_ae_train_500/model.ckpt')
+    saver = tf.train.import_meta_graph(os.path.join(p.adversarial_train_model_500, 'model.ckpt.meta'))
+    saver.restore(sess, os.path.join(p.adversarial_train_model_500, 'model.ckpt'))
 
     graph = tf.get_default_graph()
 
@@ -107,8 +107,14 @@ with tf.Session() as sess:
     print("correct_prediction:", result[14])
     print("accuracy:", result[15])
 
-    log_file = open("./logs/" + "ss4_test_original_use_AE-net" + str(int(round(time.time() * 1000))) + ".txt", "w")
+    p.ensure_dir(p.adversarial_train_logs_dir)
+    log_file = open(
+        os.path.join(
+            p.adversarial_train_logs_dir,
+            "ss4_test_original_use_AE-net" + str(int(round(time.time() * 1000))) + ".txt",
+        ),
+        "w",
+    )
     log_file.write("\ncorrect_prediction: " + str(result[14]))
     log_file.write("\naccuracy: " + str(result[15]))
     log_file.close()
-

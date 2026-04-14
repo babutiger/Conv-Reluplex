@@ -15,9 +15,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 # 设置随机化种子，保持运算结果一致
 
 #mnist数据集中训练数据和测试数据保存地址
-train_path = '/home/lzs/Documents/my_image_net/mycode/data_set/mnist_data/train/'
-# train_path = '/home/lzs/Documents/my_image_net/mycode/data_set/mnist_data/test/'
-test_path = '/home/lzs/Documents/my_image_net/mycode/data_set/mnist_data/test/'
+train_path = p.mnist_train_path
+test_path = p.mnist_test_path
 
 # 读取训练数据及测试数据
 train_data,train_label = fs.read_image(train_path)
@@ -226,8 +225,13 @@ with tf.Session() as sess:
 
     # -----------  添加tensorboard data ---------------
     merged = tf.summary.merge_all()  # 将图形、训练过程等数据合并在一起
-    writer_train = tf.summary.FileWriter("./temp-summary/train", sess.graph)
-    writer_test = tf.summary.FileWriter("./temp-summary/test", sess.graph)
+    p.ensure_dir(p.show_number_model_temp_summary_dir)
+    writer_train = tf.summary.FileWriter(
+        os.path.join(p.show_number_model_temp_summary_dir, "train"), sess.graph
+    )
+    writer_test = tf.summary.FileWriter(
+        os.path.join(p.show_number_model_temp_summary_dir, "test"), sess.graph
+    )
 
 
     #将所有样本训练10次，每次训练中以64个为一组训练完所有样本。
@@ -276,11 +280,10 @@ with tf.Session() as sess:
         writer_test.add_summary(merged_test, i)
 
     # 存储模型所有参数
-    folder = "./temp-model/"
-    if not os.path.exists(folder):
-        os.mkdir(folder)
+    folder = p.show_number_model_temp_model_dir
+    p.ensure_dir(folder)
 
-    saver.save(sess, folder+"model.ckpt")
+    saver.save(sess, os.path.join(folder, "model.ckpt"))
 
 
 writer_train.close()
@@ -303,33 +306,34 @@ y2 = Loss_list_train
 y3 = Accuracy_list_test
 y4 = Loss_list_test
 
+p.ensure_dir(p.show_number_model_graph_dir)
 
 plt.plot(x1, y1, 'o-')
 plt.title('Train accuracy vs. epoches')
 plt.xlabel('Epoches')
 plt.ylabel('Train accuracy')
-plt.savefig("./graph/Train-accuracy.jpg")
+plt.savefig(os.path.join(p.show_number_model_graph_dir, "Train-accuracy.jpg"))
 plt.show()
 
 plt.plot(x2, y2, 'g*-')
 plt.title('Train loss vs. epoches')
 plt.xlabel('Epoches')
 plt.ylabel('Train loss')
-plt.savefig("./graph/Train-loss.jpg")
+plt.savefig(os.path.join(p.show_number_model_graph_dir, "Train-loss.jpg"))
 plt.show()
 
 plt.plot(x3, y3, 'o-', color='orange')
 plt.title('Test accuracy vs. epoches')
 plt.xlabel('Epoches')
 plt.ylabel('Test accuracy')
-plt.savefig("./graph/Test-accuracy.jpg")
+plt.savefig(os.path.join(p.show_number_model_graph_dir, "Test-accuracy.jpg"))
 plt.show()
 
 plt.plot(x4, y4, 'g*-', color='orange')
 plt.title('Test loss vs. epoches')
 plt.xlabel('Epoches')
 plt.ylabel('Test loss')
-plt.savefig("./graph/Test-loss.jpg")
+plt.savefig(os.path.join(p.show_number_model_graph_dir, "Test-loss.jpg"))
 plt.show()
 
 plt.plot(x1, y1, 'o-', label="Train accuracy")
@@ -338,7 +342,9 @@ plt.title('Train accuracy vs. Test accuracy')
 plt.xlabel('Epoches')
 plt.ylabel('Accuracy')
 plt.legend()
-plt.savefig("./graph/Train-accuracy-vs-Test-accuracy.jpg")
+plt.savefig(
+    os.path.join(p.show_number_model_graph_dir, "Train-accuracy-vs-Test-accuracy.jpg")
+)
 plt.show()
 
 plt.plot(x2, y2, 'g*-', label="Train loss")
@@ -347,7 +353,7 @@ plt.title('Train loss vs. Test loss')
 plt.xlabel('Epoches')
 plt.ylabel('Loss')
 plt.legend()
-plt.savefig("./graph/Train-loss-vs-Test-loss.jpg")
+plt.savefig(os.path.join(p.show_number_model_graph_dir, "Train-loss-vs-Test-loss.jpg"))
 plt.show()
 
 

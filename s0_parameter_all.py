@@ -1,14 +1,55 @@
 # -*- coding: utf-8 -*-
 import numpy as np
-import  os
+import os
 
 
+_REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# 获取当前工作目录路径
-# file_base = os.getcwd()
-file_base = '/home/lzs/Documents/my_image_net/mycode/mnist_all_minish_one_map_9_9/'
-model = file_base + 'model_9_9'
+
+def _normalize_dir(path):
+    path = os.path.abspath(path)
+    if not path.endswith(os.sep):
+        path += os.sep
+    return path
+
+
+def repo_path(*parts):
+    return os.path.join(file_base, *parts)
+
+
+def data_path(env_name, *parts):
+    return os.environ.get(env_name, repo_path(*parts))
+
+
+def ensure_dir(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+
+# Root directory for repository-local paths. Override only if you intentionally
+# keep data outside the repository.
+file_base = _normalize_dir(os.environ.get('CONV_RELUPLEX_ROOT', _REPO_ROOT))
+model = os.environ.get('CONV_RELUPLEX_MODEL_DIR', repo_path('model_9_9'))
 # model = file_base + 'adversarial_train/model_9_9_after_ae_train_1000'
+
+mnist_train_path = data_path('CONV_RELUPLEX_MNIST_TRAIN_DIR', 'data_set', 'mnist_data', 'train')
+mnist_test_path = data_path('CONV_RELUPLEX_MNIST_TEST_DIR', 'data_set', 'mnist_data', 'test')
+
+adversarial_train_data_train_path = data_path(
+    'CONV_RELUPLEX_ADV_TRAIN_DIR', 'adversarial_train_data_train'
+)
+adversarial_train_data_test_path = data_path(
+    'CONV_RELUPLEX_ADV_TEST_DIR', 'adversarial_train_data_test'
+)
+
+show_number_model_temp_summary_dir = repo_path('show_number_model', 'temp-summary')
+show_number_model_temp_model_dir = repo_path('show_number_model', 'temp-model')
+show_number_model_graph_dir = repo_path('show_number_model', 'graph')
+
+adversarial_train_logs_dir = repo_path('adversarial_train', 'logs')
+adversarial_train_temp_model_dir = repo_path('adversarial_train', 'temp-model')
+adversarial_train_model_500 = repo_path('adversarial_train', 'model_9_9_after_ae_train_500')
+adversarial_train_model_1000 = repo_path('adversarial_train', 'model_9_9_after_ae_train_1000')
 
 # 图片输入层参数
 w = 28
@@ -238,5 +279,4 @@ ae_fc_input_list = [
 
 # map = 9*9, delta = 0.6, 0 fix at 0, gap = -0.01, 9 to 7,
 # map = 9*9, delta = 0.6, 0 fix at 0, gap = -0.01, 9 to 8,
-
 

@@ -17,10 +17,9 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 #mnist数据集中训练数据和测试数据保存地址
-train_path = '/home/lzs/Documents/my_image_net/mycode/mnist_all_minish_one_map_9_9/adversarial_train_data_train/'
-test_path = "/home/lzs/Documents/my_image_net/mycode/mnist_all_minish_one_map_9_9/adversarial_train_data_test/"
-
-test_original_path = '/home/lzs/Documents/my_image_net/mycode/data_set/mnist_data/test/'
+train_path = p.adversarial_train_data_train_path
+test_path = p.adversarial_train_data_test_path
+test_original_path = p.mnist_test_path
 
 # 读取训练数据及测试数据
 train_data,train_label = fs.read_image(train_path)
@@ -51,8 +50,8 @@ def adversarial_train():
     with tf.Session() as sess:
 
         # 载入已有模型
-        saver = tf.train.import_meta_graph('../model_9_9/model.ckpt.meta')
-        saver.restore(sess, '../model_9_9/model.ckpt')
+        saver = tf.train.import_meta_graph(os.path.join(p.model, 'model.ckpt.meta'))
+        saver.restore(sess, os.path.join(p.model, 'model.ckpt'))
 
         graph = tf.get_default_graph()
 
@@ -80,7 +79,14 @@ def adversarial_train():
         print("test ae loss:", err)
         print("test ae acc:", acc)
 
-        log_file = open("./logs/" + "ss3_adversarial_training" + str(int(round(time.time() * 1000))) + ".txt", "w")
+        p.ensure_dir(p.adversarial_train_logs_dir)
+        log_file = open(
+            os.path.join(
+                p.adversarial_train_logs_dir,
+                "ss3_adversarial_training" + str(int(round(time.time() * 1000))) + ".txt",
+            ),
+            "w",
+        )
         log_file.write("\n\n***** before ae training *****")
         log_file.write("\ntest ae loss: " + str(err))
         log_file.write("\ntest ae acc: " + str(acc))
@@ -213,10 +219,9 @@ def adversarial_train():
 
 
         # 存储模型所有参数
-        folder = "./temp-model/"
-        if not os.path.exists(folder):
-            os.mkdir(folder)
-        saver.save(sess, "./temp-model/model.ckpt")
+        folder = p.adversarial_train_temp_model_dir
+        p.ensure_dir(folder)
+        saver.save(sess, os.path.join(folder, "model.ckpt"))
 
 
         # change end

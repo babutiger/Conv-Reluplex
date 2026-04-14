@@ -18,8 +18,7 @@ import matplotlib.image as mpimg
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # 读取测试数据，并打乱顺序
-test_path = "/home/lzs/Documents/my_image_net/mycode/mnist_all_minish_one_map_9_9/adversarial_train_data_test/"
-# test_path = "/home/lzs/Documents/my_image_net/mycode/mnist_all_minish_one_map_9_9/adversarial_train_data_train/"
+test_path = p.adversarial_train_data_test_path
 
 # 读取训练数据及测试数据
 test_data,test_label = fs.read_image(test_path)
@@ -100,7 +99,14 @@ with tf.Session() as sess:
     print("correct_prediction:", result[14])
     print("accuracy:", result[15])
 
-    log_file = open("./logs/" + "ss2_test_ae_use_OR-net" + str(int(round(time.time() * 1000))) + ".txt", "w")
+    p.ensure_dir(p.adversarial_train_logs_dir)
+    log_file = open(
+        os.path.join(
+            p.adversarial_train_logs_dir,
+            "ss2_test_ae_use_OR-net" + str(int(round(time.time() * 1000))) + ".txt",
+        ),
+        "w",
+    )
 
     length = len(result[14])
     for idx in range(length):

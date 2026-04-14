@@ -11,6 +11,13 @@ Legacy research code for generating and reconstructing adversarial examples on a
 
 This repository is a code-and-artifacts snapshot. It includes pretrained checkpoints, intermediate parameter dumps, generated examples, and solver logs used by the original experiments.
 
+For reproducibility, this repository now includes:
+
+- a legacy import compatibility package for `mycode.mnist_all_minish_one_map_9_9`
+- repository-relative path defaults instead of hard-coded `/home/...` paths
+- a `requirements.txt` file
+- a setup checker at `scripts/check_setup.py`
+
 ## Paper
 
 Paper title: `Conv-Reluplex : A Verification Framework For Convolution Neural Networks`
@@ -61,6 +68,53 @@ The workflow is roughly:
 7. Solve the resulting inequality system with `pulp`.
 8. Reconstruct and save the adversarial image.
 
+## Quick Reproduction
+
+Recommended environment: `Python 3.7` with `TensorFlow 1.15`.
+
+1. Create an environment and install dependencies:
+
+```bash
+python3.7 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+2. Put MNIST images in one of these two ways:
+
+- preferred: create `data_set/mnist_data/train/` and `data_set/mnist_data/test/`
+- or: keep them anywhere and point the code to them with environment variables
+
+3. Validate the local setup:
+
+```bash
+python scripts/check_setup.py
+```
+
+4. If your MNIST directories live outside the repository, export overrides:
+
+```bash
+export CONV_RELUPLEX_MNIST_TRAIN_DIR=/path/to/mnist/train
+export CONV_RELUPLEX_MNIST_TEST_DIR=/path/to/mnist/test
+python scripts/check_setup.py
+```
+
+5. Run the pipeline from the repository root:
+
+```bash
+python s1_train_28_minish_one.py
+python s2_predict_write_28_minish_two.py
+python s3_trans_main_three.py
+python s4_main_predict_from_fc_four.py
+python s5_layer2_pool_to_conv_result_five.py
+python s6_main_write_layer1_compute_process_six.py
+python z_pulp_application/main_7_8_9_step.py
+```
+
+The repository already includes `model_9_9/`, `adversarial_train_data_*`, and
+other intermediate artifacts, so you can also start from later steps if you
+want to reproduce the paper results without retraining everything from scratch.
+
 ## Main Entry Files
 
 - `s0_parameter_all.py`: central experiment configuration
@@ -94,11 +148,13 @@ There are also two batch helpers:
 
 ## Environment Notes
 
-This codebase is not a modern, plug-and-play package. Before running it, expect to adapt a few legacy assumptions:
+This codebase is legacy research code, but the repository has been adjusted so
+that it can be rerun from the repository root without mirroring the author's
+original directory layout.
 
 - It uses TensorFlow 1.x style APIs such as `tf.placeholder` and `tf.contrib`.
-- Many files import modules from `mycode.mnist_all_minish_one_map_9_9`, which reflects the author's original local package layout.
-- Some scripts contain hard-coded absolute paths, especially in `s0_parameter_all.py` and `s1_train_28_minish_one.py`.
+- Legacy imports from `mycode.mnist_all_minish_one_map_9_9` are now supported in-repo.
+- Path configuration is centralized in `s0_parameter_all.py` and can be overridden with environment variables.
 - External Reluplex / Leaky-Reluplex runs are not bundled here; this repository prepares data for those tools and consumes their results.
 
 Likely Python dependencies include:
@@ -115,9 +171,9 @@ Likely Python dependencies include:
 
 If you want to rerun the pipeline, start here:
 
-1. Update `file_base` and related paths in `s0_parameter_all.py`.
-2. Update MNIST dataset paths in `s1_train_28_minish_one.py`.
-3. Fix or mirror the original import layout under `mycode.mnist_all_minish_one_map_9_9`.
+1. Install dependencies from `requirements.txt`.
+2. Place MNIST under `data_set/mnist_data/` or export the `CONV_RELUPLEX_MNIST_*` environment variables.
+3. Run `python scripts/check_setup.py`.
 4. Train or reuse a checkpoint from `model_9_9/` or `adversarial_train/`.
 5. Run the step scripts in sequence from `s1` through `s9`.
 6. Use Reluplex or Leaky-Reluplex externally between `s3` and `s4`.
